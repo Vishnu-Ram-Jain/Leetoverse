@@ -5,7 +5,7 @@ public:
         int n = nums.size();
         for(j = 1;j<n;j++){
 
-            while((merge & nums[j]) > 0){
+            while((merge & nums[j]) != 0){
                 merge = merge ^ nums[i];
                 i++;
             }
