@@ -13,7 +13,6 @@ public:
                 if(mp[nums[i]] == 0)mp.erase(nums[i]);
                 i++;
             }
-            // if(mp.size() == k) ans += (j-i+1);
             ans += (j-i+1);
         }
         return ans;
