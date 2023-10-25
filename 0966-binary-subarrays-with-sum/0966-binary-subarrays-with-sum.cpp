@@ -11,9 +11,10 @@ public:
                 sum -= arr[i];
                 i++;
             }
-            if(sum <= k){
-                ans += (j-i+1);
-            }
+            // if(sum <= k){
+            //     ans += (j-i+1);
+            // }
+            ans += (j-i+1);
         }
         return ans;
     }
