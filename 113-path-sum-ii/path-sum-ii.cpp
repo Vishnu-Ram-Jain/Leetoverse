@@ -22,10 +22,10 @@ public:
             return ;
         }
         op.push_back(root->val);
-        tar = tar-root->val;
-        if(root->left!=NULL)f(root->left,op,ans,tar);
-        if(root->right!=NULL)f(root->right,op,ans,tar);
-        tar = tar+root->val;
+        // tar = tar-root->val;
+        if(root->left!=NULL)f(root->left,op,ans,tar-root->val);
+        if(root->right!=NULL)f(root->right,op,ans,tar-root->val);
+        // tar = tar+root->val;
         op.pop_back();
     }
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
