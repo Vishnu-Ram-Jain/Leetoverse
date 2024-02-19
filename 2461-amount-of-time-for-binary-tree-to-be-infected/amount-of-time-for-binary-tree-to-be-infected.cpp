@@ -43,7 +43,7 @@ public:
         int totcnt = 0;
         TreeNode* tar = NULL;
         inorder(root,start,totcnt,tar);
-        cout<<tar->val<<" "<<totcnt<<endl;
+        // cout<<tar->val<<" "<<totcnt<<endl;
         // return 0;
         queue<TreeNode*> q;
         q.push(tar);
