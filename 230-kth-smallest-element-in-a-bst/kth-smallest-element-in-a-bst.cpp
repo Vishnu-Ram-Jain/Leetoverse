@@ -18,7 +18,7 @@ public:
         k--;
         if(k==0){
             mn = root->val;
-            // return ;
+            return ;
         }
         f(root->right,k);
     }
