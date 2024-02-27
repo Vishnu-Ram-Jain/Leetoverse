@@ -12,16 +12,15 @@
 class Solution {
 public:
     TreeNode* f(TreeNode* p, TreeNode* q){
-        if(p==NULL and q!=NULL)return q;
-        else if(p==NULL and q==NULL)return NULL;
-        else if(p!=NULL and q==NULL)return p;
-
-        TreeNode* root = new TreeNode(p->val+q->val);
-
-        root->left = f(p->left,q->left);
-        root->right = f(p->right,q->right);
-
-        return root;
+        if(p==NULL && q==NULL)return NULL;
+        if(p==NULL && q!=NULL)return q;
+        if(p!=NULL && q==NULL)return p;
+        TreeNode* newnode = new TreeNode(0);
+        if(p!=NULL)newnode->val += p->val;
+        if(q!=NULL)newnode->val += q->val;
+        newnode->left = f(p->left,q->left);
+        newnode->right = f(p->right,q->right);
+        return newnode;
     }
     TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
         return f(root1,root2);
