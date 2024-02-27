@@ -12,26 +12,29 @@
 class Solution {
 public:
     bool f(TreeNode* p, TreeNode* q){
-        if(p==NULL and q==NULL)return 1;
-        if(p==NULL and q!=NULL)return 0;
-        if(p!=NULL and q==NULL)return 0;
-        if(p->val != q->val)return 0;
-
-
+        if(p==NULL && q != NULL)return false;
+        if(p!=NULL && q == NULL)return false;
+        if(p==NULL && q == NULL)return true;
+        if(p->val != q->val)return false;
         bool left = f(p->left,q->left);
         bool right = f(p->right,q->right);
-
         return left && right;
-    }
-    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
-       if(subRoot == NULL){
-            return true;
-        }
-        if (root == NULL) {
-            return false;
-        }
-        if(f(root,subRoot))return true;
 
+    }
+    // TreeNode* node(TreeNode* root, TreeNode* sub){
+    //     if(root==NULL)return NULL;
+    //     if(root->val==sub->val){
+    //         return root;
+    //     }
+    //     f(root->left,sub);
+    //     f(root->right,sub);
+    //     return NULL;
+    // }
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        if(root==NULL)return false;
+        if(subRoot==NULL)return true;
+
+        if(f(root,subRoot))return true;
         return isSubtree(root->left,subRoot) or isSubtree(root->right,subRoot);
     }
 };
