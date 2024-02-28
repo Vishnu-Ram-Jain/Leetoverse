@@ -6,6 +6,7 @@ public:
 
         vector<vector<int>> vis(n,vector<int>(m,0));
         vector<vector<int>> dis(n,vector<int>(m,0));
+
         queue<pair<pair<int,int>,int>> q;
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
@@ -23,7 +24,7 @@ public:
             int col = it.first.second;
             int dist = it.second;
             q.pop();
-            dis[row][col] = dist;
+            // dis[row][col] = dist;
 
             for(int i=0;i<4;i++){
                 int nrow = row + delrow[i];
@@ -31,6 +32,7 @@ public:
                 if(nrow>=0 && ncol>=0 && nrow<n && ncol<m && !vis[nrow][ncol]){
                     vis[nrow][ncol] = 1;
                     q.push({{nrow,ncol},1+dist});
+                    dis[nrow][ncol] = 1 + dist;
                 }
             }
         }
