@@ -1,22 +1,44 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
     ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
-        ListNode *currNode = list1;
-        int index = 0;
-        while(index < a-1){
-            currNode = currNode->next;
-            index++;
+        ListNode* tempa = list1;
+        ListNode* tempb = list1;
+        // ListNode* curra = NULL;
+        // ListNode* currb = NULL;
+        ListNode* curr = list1;
+        ListNode * prev = NULL;
+        a -= 1;
+        while(a != 0){
+            tempa = tempa->next;
+            a--;
         }
-        ListNode *front = currNode;
-        while(index < b+1){
-           currNode = currNode->next;
-           index++;
+        b += 1;
+        while(b != 0){
+            tempb = tempb->next;
+            b--;
         }
-        ListNode *rear = currNode;
-        ListNode *secondListTail = list2, *secondListHead = list2;
-        while(secondListTail->next != NULL)secondListTail = secondListTail->next;
-        front->next = secondListHead;
-        secondListTail->next = rear;
+        ListNode* head = list2;
+        ListNode* last = NULL;
+        while(head != NULL){
+            if(head->next == NULL)last = head;
+            head = head->next;
+        }
+        tempa->next = NULL;
+        tempa->next = list2;
+        last->next = tempb;
+
+        // currb->next = NULL;
         return list1;
+
     }
 };
