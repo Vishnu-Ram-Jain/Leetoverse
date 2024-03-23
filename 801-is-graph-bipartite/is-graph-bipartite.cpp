@@ -1,19 +1,18 @@
 class Solution {
 public:
     bool bfs(vector<int> adj[], vector<bool> &vis, int snode, vector<int> &col){
-        queue<pair<int,bool>> q;
-        q.push({snode,0});
+        queue<int> q;
+        q.push(snode);
         col[snode] = 0;
         vis[snode] = 1;
         while(!q.empty()){
-            int node = q.front().first;
-            int color = q.front().second;
+            int node = q.front();
             q.pop();
             for(auto it : adj[node]){
                 if(!vis[it]){
                     vis[it] = 1;
                     col[it] = !col[node];
-                    q.push({it,!color});
+                    q.push(it);
                 }
                 else{
                     if(col[it] == col[node])return false;
