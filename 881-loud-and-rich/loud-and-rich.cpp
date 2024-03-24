@@ -1,39 +1,35 @@
 class Solution {
 public:
-    void dfs(int node, vector<bool>&visited, vector<int>adj[], stack<int>&st) {
-        visited[node] = true;
-        for (auto child : adj[node]) {
-            if (visited[child])
-                continue;
-            dfs(child, visited, adj, st);
-        }
-        st.push(node);
-    }
-    vector<int> loudAndRich(vector<vector<int>>& richer, vector<int>& quiet) {
-        int n = quiet.size();
-        vector<int>ans(n, 0);
-        stack<int>order;
-        vector<int>adj[n];
-
-        for (int i = 0; i < n; i++)
-            ans[i] = i;
-
-        for (auto vec : richer) {
-            adj[vec[0]].push_back(vec[1]);
-        }
-
-        vector<bool>visited(n, false);
-        for (int i = 0; i < n; i++)
-            if (!visited[i])
-                dfs(i, visited, adj, order);
-
-        while (!order.empty()) {
-            int node = order.top();
-            order.pop();
-            for (auto child : adj[node]) {
-                if (quiet[ans[child]] > quiet[ans[node]])
-                    ans[child] = ans[node];
+    void dfs(int node, vector<int> &op, vector<int> adj[], vector<int> &vis){
+        op.push_back(node);
+        vis[node] = 1;
+        for(auto it : adj[node]){
+            if(!vis[it]){
+                dfs(it,op,adj,vis);
             }
+        }
+    }
+    vector<int> loudAndRich(vector<vector<int>>& r, vector<int>& q) {
+        int n = q.size();
+        vector<int> adj[n];
+        for (auto vec : r) {
+            adj[vec[1]].push_back(vec[0]);
+        }
+        vector<int> ans(n,1e8);
+        for(int i=0;i<n;i++){
+            vector<int> vis(n+1,0);
+            vector<int> op;
+        
+            dfs(i,op,adj,vis);
+            int val = 1e9;
+            for(int j=0;j<op.size();j++){
+                // cout<<op[j]<<" ";
+                if(val >= q[op[j]]){
+                    val = q[op[j]];
+                    ans[i] = op[j];
+                } 
+            }
+                // cout<<endl;
         }
         return ans;
     }
