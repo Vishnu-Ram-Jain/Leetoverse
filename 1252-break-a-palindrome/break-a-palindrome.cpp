@@ -10,12 +10,10 @@ public:
         return true;
     }
     string breakPalindrome(string s) {
-        // s[0]++;
         string orig = s;
         int n = s.size();
-        map<string,bool> mp;
+        unordered_map<string,bool> mp;
         for(int i=0;i<n;i++){
-            // char ch = s[i];
             for(char c='a';c<='z';c++){
                 char ch = s[i];
                 s[i] = c;
@@ -24,15 +22,15 @@ public:
                 }
                 s[i] = ch;
             }
-            // s[i] = ch;
         }
         if(mp.size() == 0)return "";
         auto it = mp.begin();
 
-        return it->first == s ? "" : it->first;
-        // for(auto it : mp){
-        //     cout<<it.first<<endl;
-        // }
-        // return "";
+        string temp = it->first;
+
+        for(auto it : mp){
+            if(temp > it.first)temp = it.first;
+        }
+        return temp;
     }
 };
