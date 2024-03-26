@@ -1,32 +1,66 @@
-class Solution {
-public:
-    void dfs(int snode, vector<int> &vis, vector<int> adj[]){
-        vis[snode] = 1;
+class DisjointSet{
+    vector<int> parent,rank;
+    public:
 
-        for(auto it : adj[snode]){
-            if(!vis[it]){
-                dfs(it,vis,adj);
-            }
+    DisjointSet(int n){
+        parent.resize(n+1);
+        rank.resize(n+1,0);
+
+        for(int i=0;i<=n;i++){
+            parent[i] = i;
         }
     }
-    int makeConnected(int n, vector<vector<int>>& c) {
-        int totedges = c.size();
-        if(totedges < n - 1)return -1;
-        vector<int> vis(n,0);
-        vector<int> adj[n+1];
-        for(auto it : c){
-            adj[it[0]].push_back(it[1]);
-            adj[it[1]].push_back(it[0]);
-        }
-        int count = 0;
 
-        for(int i=0;i<n;i++){
-            if(!vis[i]){
-                dfs(i,vis,adj);
-                count++;
+    int findUPar(int node){
+        if(node == parent[node])return node;
+
+        return parent[node] = findUPar(parent[node]);
+    }
+
+    void union_by_rank(int u, int v){
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+
+        if(ulp_u == ulp_v)return;
+
+        if(rank[ulp_u] < rank[ulp_v]){
+            parent[ulp_u] = ulp_v;
+        }
+        else if(rank[ulp_u] > rank[ulp_v]){
+            parent[ulp_v] = ulp_u;
+        }
+        else{
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
+        }
+    }
+};
+class Solution {
+public:
+    int makeConnected(int n, vector<vector<int>>& connections) {
+        DisjointSet ds(n);
+        // int totedge = connections.size();
+        // if(totedge < n-1)return -1;
+        int extraedges = 0;
+        for(auto it : connections){
+            int u = it[0];
+            int v = it[1];
+
+            int pu = ds.findUPar(u);
+            int pv = ds.findUPar(v);
+
+            if(pu != pv){
+                ds.union_by_rank(u,v);
+            }
+            else{
+                extraedges++;
             }
         }
+        int count = 0;
+        for(int i=0;i<n;i++){
+            if(ds.findUPar(i) == i)count++;
+        }
 
-        return count - 1;
+        return extraedges >= count-1 ? count-1 : -1;
     }
 };
