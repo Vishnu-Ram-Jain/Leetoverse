@@ -11,31 +11,36 @@
  */
 class Solution {
 public:
-    int dfs(unordered_map<int,int> &mp, int &maxi, TreeNode* root){
-        if(root==NULL)return 0;
-        // if(root->left==NULL && root->right==NULL){
-        //     mp[root->val]++;
-        //     maxi = max(maxi,mp[root->val]);
-        //     return root->val;
-        // }
+    int f(TreeNode* root, unordered_map<int,int> &mp, int &maxi){
+        if(root->left==NULL && root->right==NULL){
+            mp[root->val]++;
+            maxi = max(maxi,mp[root->val]);
+            return root->val;
+        }
 
-        int leftsum = dfs(mp,maxi,root->left);
-        int rightsum = dfs(mp,maxi,root->right);
+        int leftsum = 0;
+        if(root->left != NULL){
+            leftsum = f(root->left,mp,maxi);
+        }
+        int rightsum = 0;
+        if(root->right != NULL){
+            rightsum = f(root->right,mp,maxi);
+        }
 
         int sum = root->val + leftsum + rightsum;
         mp[sum]++;
         maxi = max(maxi,mp[sum]);
         return sum;
+        
     }
     vector<int> findFrequentTreeSum(TreeNode* root) {
-        int maxi = -1e9;
         unordered_map<int,int> mp;
-        dfs(mp,maxi,root);
+        int maxi = -1e9;
+        f(root,mp,maxi);
+
         vector<int> ans;
         for(auto it : mp){
-            if(it.second == maxi){
-                ans.push_back(it.first);
-            }
+            if(maxi == it.second)ans.push_back(it.first);
         }
         return ans;
     }
