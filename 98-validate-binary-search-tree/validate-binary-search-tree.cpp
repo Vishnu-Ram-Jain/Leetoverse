@@ -10,12 +10,11 @@
  * };
  */
 class Solution {
-public: 
+public:
     typedef long long ll;
     bool f(TreeNode* root, ll mini, ll maxi){
         if(root==NULL)return true;
         if(root->val >= maxi || root->val <= mini)return false;
-
         bool l = f(root->left,mini,root->val);
         bool r = f(root->right,root->val,maxi);
         return l && r;
