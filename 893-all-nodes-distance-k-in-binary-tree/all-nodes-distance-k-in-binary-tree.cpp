@@ -16,56 +16,53 @@ public:
         while(!q.empty()){
             TreeNode* node = q.front();
             q.pop();
-
-            if(node->left){
+            if(node->left!=NULL){
                 mp[node->left] = node;
                 q.push(node->left);
             }
-
-            if(node->right){
+            if(node->right!=NULL){
                 mp[node->right] = node;
                 q.push(node->right);
             }
         }
     }
-    vector<int> distanceK(TreeNode* root, TreeNode* tar, int k) {
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+        // if(root->left==NULL and root->right==NULL)return 
+        queue<TreeNode*> q;
         unordered_map<TreeNode*,TreeNode*> mp;
         markParents(root,mp);
         unordered_map<TreeNode*,bool> vis;
-
-        queue<TreeNode*> q;
-        q.push(tar);
-        vis[tar] = 1;
-        int dis = 0;
+        vector<int> ans;
+        vis[target] = 1;
+        q.push(target);
+        int level = 0;
         while(!q.empty()){
-            int size = q.size();
-            if(dis == k)break;
-            dis++;
-            for(int i=0;i<size;i++){
+            int sz = q.size();
+            if(level == k)break;
+            level++;
+            for(int i=0;i<sz;i++){
                 TreeNode* node = q.front();
                 q.pop();
-
-                if(node->left && !vis[node->left]){
+                if(node->left!=NULL && !vis[node->left]){
                     vis[node->left] = 1;
                     q.push(node->left);
                 }
-                if(node->right && !vis[node->right]){
+                if(node->right!=NULL && !vis[node->right]){
                     vis[node->right] = 1;
                     q.push(node->right);
                 }
 
-                if(mp[node] && !vis[mp[node]]){
+                if(mp[node] &&!vis[mp[node]]){
                     vis[mp[node]] = 1;
                     q.push(mp[node]);
                 }
             }
         }
-        vector<int> ans;
+
         while(!q.empty()){
             ans.push_back(q.front()->val);
             q.pop();
         }
         return ans;
-        
     }
 };
