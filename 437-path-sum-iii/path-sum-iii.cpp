@@ -15,20 +15,17 @@ public:
     typedef long long ll;
     void f(TreeNode* root, ll tar){
         if(root==NULL)return ;
-        if(root->val==tar){
+        if(root->val == tar){
             cnt++;
-            // return;
         }
-
         f(root->left,tar-root->val);
         f(root->right,tar-root->val);
     }
     int pathSum(TreeNode* root, int targetSum) {
         if(root==NULL)return 0;
-        // int cnt = 0;
         f(root,targetSum);
-        pathSum(root->left,targetSum);
-        pathSum(root->right,targetSum);
+        if(root->left!=NULL)pathSum(root->left,targetSum);
+        if(root->right!=NULL)pathSum(root->right,targetSum);
         return cnt;
     }
 };
