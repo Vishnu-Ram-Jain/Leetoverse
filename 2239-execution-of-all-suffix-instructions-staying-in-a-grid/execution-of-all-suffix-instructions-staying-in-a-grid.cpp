@@ -23,27 +23,11 @@ vector<pair<int,int>> dir = {{0,-1},{-1,0},{0,1},{1,0}};
         return {nrow,ncol};
 
     }
-    // void dfs(int row, int col, string &s, int &cnt, int ind, int n){
-    //     if(ind >= s.size())return ;
-        // for(int j=ind;j<s.size();j++){
-        //     int nrow = row + f(s[j]).first;
-        //     int ncol = col + f(s[j]).second;
-        //     if(nrow>=0 && ncol>=0 && nrow<n && ncol<n){
-        //         cnt++;
-        //         dfs(nrow,ncol,s,cnt,j+1,n);
-        //     }
-        //     else{
-        //         return ;
-        //     }
-        // }
-    // }
     vector<int> executeInstructions(int n, vector<int>& startPos, string s) {
         
         // int n = s.size();
         int sz = s.size();
         vector<int> v(sz,0);
-
-        // int cnt = 0;
         for(int i=0;i<sz;i++){
             int cnt = 0;
             int row = startPos[0];
