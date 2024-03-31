@@ -27,7 +27,7 @@ public:
         for(j=0;j<n;j++){
             addcontributionJ(nums[j],bit);
 
-            while(i < j && !good(bit)){
+            while(i <= j && !good(bit)){
                 removecontributionI(nums[i],bit);
                 i++;
             }
