@@ -14,6 +14,7 @@ public:
             int distance = pq.top().first;
             int row = pq.top().second.first;
             int col = pq.top().second.second;
+            if(row == n-1 && col == n-1)return distance;
             pq.pop();
             for(int i=0;i<8;i++){
                 int nrow = row + delrow[i];
@@ -28,7 +29,8 @@ public:
             }
         }
 
-        if(dist[n-1][n-1] == 1e9)return -1;
-        return dist[n-1][n-1];
+        // if(dist[n-1][n-1] == 1e9)return -1;
+        // return dist[n-1][n-1];
+        return -1;
     }
 };
