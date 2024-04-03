@@ -4,7 +4,7 @@ public:
     int mod = 1e9 + 7;
     int countPairs(vector<int>& arr) {
         unordered_map<int,int> mp;
-        unordered_map<ll,int> mm;
+        // unordered_map<ll,int> mm;
         vector<ll> power(22,0);
 
         for(int i=0;i<22;i++){
@@ -18,10 +18,10 @@ public:
             for(int j=0;j<22;j++){
                 int rem = power[j] - val;
                 if(rem<0)continue;
-                if(mp.find(rem) != mp.end())cnt = (cnt + mm[rem]) % mod;
+                if(mp.find(rem) != mp.end())cnt = (cnt + mp[rem]) % mod;
             }
-            mp[arr[i]] = i;
-            mm[arr[i]]++;
+            mp[arr[i]]++;
+            // mm[arr[i]]++;
         }
         return cnt % mod;
     }
