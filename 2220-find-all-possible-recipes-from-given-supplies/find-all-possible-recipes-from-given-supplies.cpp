@@ -24,11 +24,7 @@ public:
             }
         }
         // cout<<f<<endl;
-        // for(auto it : r){
-        //     for(auto i : adj[it]){
-        //         ind[i]++;
-        //     }
-        // }
+    
         queue<string> q;
         vector<string> v;
         for(auto it : ind){
