@@ -4,8 +4,8 @@ public:
         int dst=0;
         for(int i=0;i<s.size();i++){
             if(s[i] != t[i]){
-                int fwd = (s[i] - t[i]) ;
-                int bwd = 26 - (s[i] - t[i]);
+                int fwd = abs(s[i] - t[i]) ;
+                int bwd = abs(26 - (s[i] - t[i]));
                 dst += min(fwd,bwd);
             }
         }
