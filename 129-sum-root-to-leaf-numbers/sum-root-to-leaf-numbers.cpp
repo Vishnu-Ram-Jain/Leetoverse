@@ -18,7 +18,7 @@ public:
         if(root->left==NULL && root->right==NULL){
             num = (num*10) + root->val;
             sum += num;
-            num = (num/10) - root->val;
+            // num = (num/10) - root->val;
             return ;
         }
 
