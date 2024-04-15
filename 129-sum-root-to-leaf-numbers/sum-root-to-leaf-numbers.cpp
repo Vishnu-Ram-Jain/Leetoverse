@@ -11,26 +11,24 @@
  */
 class Solution {
 public:
-    void f(TreeNode* root, int &sum, int num){
-
-        if(root==NULL)return;
-
+    int sum = 0;
+    void f(TreeNode* root, int num){
+        if(root == NULL)return ;
         if(root->left==NULL && root->right==NULL){
-            num = (num*10) + root->val;
+            num = (num * 10) + root->val;
             sum += num;
-            // num = (num/10) - root->val;
             return ;
         }
+        num = (num * 10) + root->val;
 
-        num = (num*10) + root->val;
-        f(root->left,sum,num);
-        f(root->right,sum,num);
-        // num = (num/10) - root->val;
+        f(root->left,num);
+        f(root->right,num);
+
+        num = (num / 10);
     }
     int sumNumbers(TreeNode* root) {
-        int sum = 0;
         int num = 0;
-        f(root,sum,num);
+        f(root,num);
         return sum;
     }
 };
