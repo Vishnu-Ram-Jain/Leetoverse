@@ -24,7 +24,6 @@ public:
         f(root->left,num);
         f(root->right,num);
 
-        num = (num / 10);
     }
     int sumNumbers(TreeNode* root) {
         int num = 0;
