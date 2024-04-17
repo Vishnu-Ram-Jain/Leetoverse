@@ -17,14 +17,14 @@ public:
             op += (root->val + 'a');
             reverse(op.begin(),op.end());
             mp[op] = 1;
-            op.pop_back();
+            // op.pop_back();
             return ;
         }
 
         op += (root->val + 'a');
         if(root->left != NULL)f(root->left,op,mp);
         if(root->right != NULL)f(root->right,op,mp);
-        op.pop_back();
+        // op.pop_back();
     }
     string smallestFromLeaf(TreeNode* root) {
         string op = "";
