@@ -11,27 +11,24 @@
  */
 class Solution {
 public:
-    string res = "";
-    void f(TreeNode *root, string op, map<string,bool> &mp){
+    string res;
+    void f(TreeNode *root, string op){
         if(root->left==NULL && root->right==NULL){
             op += (root->val + 'a');
             reverse(op.begin(),op.end());
-            mp[op] = 1;
-            op.pop_back();
+            // mp[op] = 1;
+            if(res.size()==0)res = op;
+            res = min(res,op);
             return ;
         }
 
         op += (root->val + 'a');
-        if(root->left != NULL)f(root->left,op,mp);
-        if(root->right != NULL)f(root->right,op,mp);
-        op.pop_back();
+        if(root->left != NULL)f(root->left,op);
+        if(root->right != NULL)f(root->right,op);
     }
     string smallestFromLeaf(TreeNode* root) {
         string op = "";
-        map<string,bool> mp;
-        f(root,op,mp);
-
-        res = mp.begin()->first;
+        f(root,op);
         return res;
     }
 };
