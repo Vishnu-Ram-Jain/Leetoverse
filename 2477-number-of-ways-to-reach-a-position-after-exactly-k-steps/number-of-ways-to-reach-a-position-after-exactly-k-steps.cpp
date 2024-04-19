@@ -1,7 +1,7 @@
 class Solution {
 public:
     int mod = 1e9 + 7;
-    int dp[1001][5000];
+    int dp[1001][5002];
     int f(int pos, int e, int k){
         if(k == 0){
             if(pos == e)return 1;
