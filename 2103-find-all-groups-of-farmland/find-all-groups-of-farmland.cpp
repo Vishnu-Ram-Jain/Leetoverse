@@ -26,7 +26,6 @@ public:
                 if(mat[i][j] == 1 && !vis[i][j]){
                     int mxr = -1, mxc = -1;
                     dfs(i,j,vis,mat,mxr,mxc,n,m);
-                    // cout<<mxr<<" "<<mxc<<endl;
                     ans.push_back({i,j,mxr,mxc});
                 }
             }
