@@ -25,7 +25,7 @@ public:
 
         int p = pivot(nums,0,n-1);
         if(target == nums[p])return p;
-        cout<<p<<endl;
+        // cout<<p<<endl;
         if(target >= nums[p] && target <= nums[n-1]){
             return f(nums,p,n-1,target);
         }
