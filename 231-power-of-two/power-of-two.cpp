@@ -1,15 +1,9 @@
 class Solution {
 public:
     bool isPowerOfTwo(int n) {
-        if(n==0)return false;
-        int cnt = 0;
-        while(n != 0){
-            int bit = n & 1;
-            if(bit==1)cnt++;
-            n = n>>1;
-            if(cnt>1)return false;
-        }
-        return true;
-     
+        long long num = (long long)n;
+        if(num == 0)return false;
+        if((num & (num-1)) == 0)return true;
+        return false;
     }
 };
