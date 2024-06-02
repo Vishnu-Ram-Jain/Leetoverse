@@ -117,10 +117,12 @@ public:
     string get_maxString(string &word, int n){
         Node* node = root;
         string ans = "";
+        int cnt = 0;
         for(int i=0;i<word.size();i++){
             node = node->get(word[i]);
             if(node->getcount() != n)return ans;
             ans += word[i];
+            // cout<<node->getcount()<<" ";
         }
         return ans;
     }
@@ -140,7 +142,7 @@ public:
             }
             trie.insert(it);
         }
-        cout<<t<<endl;
+        // cout<<t<<endl;
         return trie.get_maxString(t,n);
     }
 };
