@@ -14,7 +14,7 @@ public:
             if(arr[i]){ 
                 int mask = 1;
                 mask = (mask << i);
-                ans = ans | mask;
+                ans = ans + mask;
             }
         }
         return ans;
