@@ -17,7 +17,7 @@ public:
             i++;
         }
         j = n-1;
-        while(i < j){
+        while(i < j){ 
             if(nums[i] == 1 and nums[j] == 1)i++;
             else if(nums[i] != 1 and nums[j] != 1)j--;
             else if(nums[i] != 1 and nums[j] == 1){
