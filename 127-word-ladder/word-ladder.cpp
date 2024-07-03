@@ -2,28 +2,26 @@ class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
         unordered_map<string,bool> mp;
-        
-        for(auto i : wordList) mp[i] = 1;
-
-        queue<pair<int,string>> q;
-        q.push({1,beginWord});
-
+        for(auto &it : wordList){
+            mp[it] = 1;
+        }
+        queue<pair<string,int>> q;
+        q.push({beginWord,1});
         while(!q.empty()){
-            string temp = q.front().second;
-            int steps = q.front().first;
+            string s = q.front().first;
+            int dist = q.front().second;
             q.pop();
-            if(temp == endWord)return steps;
-
-            for(int i=0;i<temp.size();i++){
-                char orig = temp[i];
+            if(s == endWord)return dist;
+            for(int i=0;i<s.size();i++){
+                char org = s[i];
                 for(char ch='a';ch<='z';ch++){
-                    temp[i] = ch;
-                    if(mp.find(temp) != mp.end()){
-                        q.push({1+steps,temp});
-                        mp.erase(temp);
+                    s[i] = ch;
+                    if(mp.find(s) != mp.end()){
+                        q.push({s,1+dist});
+                        mp.erase(s);
                     }
                 }
-                temp[i] = orig;
+                s[i] = org;
             }
         }
         return 0;
