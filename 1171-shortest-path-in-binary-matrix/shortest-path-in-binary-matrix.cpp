@@ -4,33 +4,31 @@ public:
     int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
         int n = grid.size();
         if(grid[0][0] == 1)return -1;
-        int delrow[] = {0,-1,-1,-1,0,1,1,1}; 
-        int delcol[] = {1,1,0,-1,-1,-1,0,1};
+        vector<vector<int>> vis(n,vector<int>(n,0));
         priority_queue<pp,vector<pp>,greater<pp>> pq;
         pq.push({1,{0,0}});
-        vector<vector<int>> dist(n,vector<int>(n,1e9));
-        dist[0][0] = 1;
+        vis[0][0] = 1;
+
+        int delrow[] = {0,-1,-1,-1,0,1,1,1}; 
+        int delcol[] = {1,1,0,-1,-1,-1,0,1};
+
         while(!pq.empty()){
-            int distance = pq.top().first;
+            int dist = pq.top().first;
             int row = pq.top().second.first;
             int col = pq.top().second.second;
-            if(row == n-1 && col == n-1)return distance;
             pq.pop();
+            if(row == n-1 && col == n-1)return dist;
             for(int i=0;i<8;i++){
-                int nrow = row + delrow[i];
-                int ncol = col + delcol[i];
+                int nr = row + delrow[i];
+                int nc = col + delcol[i];
 
-                if(nrow>=0 && ncol>=0 && nrow<n && ncol<n && grid[nrow][ncol] == 0){
-                    if(dist[nrow][ncol] > 1 + distance){
-                        dist[nrow][ncol] = 1 + distance;
-                        pq.push({dist[nrow][ncol],{nrow,ncol}});
-                    }
+                if(nr>=0 && nc>=0 && nc<n && nr<n && grid[nr][nc] == 0 && !vis[nr][nc]){
+                    pq.push({1+dist,{nr,nc}});
+                    vis[nr][nc] = 1;
                 }
             }
-        }
 
-        // if(dist[n-1][n-1] == 1e9)return -1;
-        // return dist[n-1][n-1];
+        }
         return -1;
     }
 };
