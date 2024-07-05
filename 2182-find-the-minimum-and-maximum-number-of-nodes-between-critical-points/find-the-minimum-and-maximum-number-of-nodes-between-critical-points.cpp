@@ -29,7 +29,7 @@ public:
             curr = curr->next;
         }
         if(v.size() < 2)return {-1,-1};
-        sort(v.begin(),v.end());
+        // sort(v.begin(),v.end());
         int mini = 1e9;
         int maxi = v[v.size()-1] - v[0];
         for(int i=0;i<v.size()-1;i++){
