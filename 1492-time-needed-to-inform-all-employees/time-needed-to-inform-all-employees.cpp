@@ -1,27 +1,25 @@
 class Solution {
 public:
-    int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
-        queue<pair<int,int>> q;
+    int numOfMinutes(int n, int headID, vector<int>& m, vector<int>& informTime) {
         vector<int> adj[n];
-
-        for(int i=0;i<n;i++){
-            if(manager[i] != -1)adj[manager[i]].push_back(i);
+        int sz = m.size();
+        for(int i=0;i<sz;i++){
+            if(m[i] != -1)adj[m[i]].push_back(i);
         }
 
-        vector<int> vis(n,0);
+        queue<pair<int,int>> q;
         q.push({0,headID});
-        vis[headID] = 1;
         int tm = 0;
         while(!q.empty()){
-            int time = q.front().first;
-            int node = q.front().second;
+            auto it = q.front();
             q.pop();
+            int node = it.second;
+            int time = it.first;
             tm = max(tm,time);
-            for(auto it : adj[node]){
-                if(!vis[it]){
-                    vis[it] = 1;
-                    q.push({informTime[node] + time,it});
-                }
+
+            for(auto &it : adj[node]){
+                int edgewt = informTime[node];
+                q.push({time+edgewt,it});
             }
         }
         return tm;
