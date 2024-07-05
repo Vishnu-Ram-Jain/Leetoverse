@@ -3,9 +3,7 @@ public:
     int maxDistance(vector<vector<int>>& grid) {
         queue<pair<int,pair<int,int>>> q;
         int n = grid.size();
-
-        vector<vector<bool>> vis(n,vector<bool>(n,0));
-
+        vector<vector<int>> vis(n,vector<int>(n,0));
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
                 if(grid[i][j] == 1 && !vis[i][j]){
@@ -14,25 +12,24 @@ public:
                 }
             }
         }
-        int delrow[] = {0,1,0,-1};
-        int delcol[] = {1,0,-1,0};
-        int maxi = 0;
+        int delrow[4] = {0,1,0,-1};
+        int delcol[4] = {1,0,-1,0};
+        int maxi = -1;
         while(!q.empty()){
-            int dist = q.front().first;
-            int row = q.front().second.first;
-            int col = q.front().second.second;
+            auto it = q.front();
             q.pop();
-            // cout<<dist<<endl;
+            int dist = it.first;
+            int row = it.second.first;
+            int col = it.second.second;
             maxi = max(maxi,dist);
-
             for(int i=0;i<4;i++){
                 int nrow = row + delrow[i];
                 int ncol = col + delcol[i];
 
-                if(nrow>=0 && ncol>=0 && nrow<n && ncol<n && !vis[nrow][ncol] 
-                && grid[nrow][ncol] == 0){
+                if(nrow>=0 && ncol>=0 && nrow<n && ncol<n && !vis[nrow][ncol]){
                     vis[nrow][ncol] = 1;
-                    q.push({1+dist,{nrow,ncol}});
+                    // int newdist = abs(nrow-row) + abs(ncol-col);
+                    q.push({1 + dist,{nrow,ncol}});
                 }
             }
         }
