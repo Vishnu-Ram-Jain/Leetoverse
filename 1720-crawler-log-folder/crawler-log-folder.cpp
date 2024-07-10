@@ -8,7 +8,7 @@ public:
                 if(cnt > 0)cnt--;
             }
             else if(s == "./"){
-
+                continue;
             }
             else{
                 cnt++;
